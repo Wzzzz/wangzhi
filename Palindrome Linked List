@@ -1,0 +1,40 @@
+//Given a singly linked list, determine if it is a palindrome.
+判断一个单链表数组是否为回文链表
+Follow up:
+Could you do it in O(n) time and O(1) space?
+//
+public class Solution {
+    public boolean isPalindrome(ListNode head) { //单链表结构为：数值+到下一个值的指针
+    ListNode fast = head,slow = head;
+    while(fast != null && fast.next != null)  // 首先考虑将单链表划分为两部分，用两个指针每次前进1和2，需要注意的是while循环中每次前进2的指针
+                                              // 必须有值对应，即fast.next不能为null，否则fast.next.next无效
+    {
+    fast = fast.next.next; //
+    slow = slow.next; 
+    }
+    
+    if (fast != null) {              
+       slow = slow.next;
+    }
+    ListNode prev = null;
+    while(slow != null)             //将单链表划为前后两部分后，将后一个部分转置，这里用的办法是将slow按顺序取数，
+                                    //然后加到prev数组的前面，形成转置 注意prev最后一个数取null
+    { 
+     ListNode next = slow.next;
+     slow.next = prev;
+     prev = slow;
+     slow = next;
+    }
+    slow = prev;
+    fast = head;
+    while(slow != null)           //最后判断每个prev和fast的每个数值是否相同，从而判断是否为回文链表
+    {
+     if(slow.val != fast.val)
+        return  false;
+     slow = slow.next;
+     fast = fast.next;
+    }
+    return true;
+    //转置：取数组第一个数null 然后把第二个数加到第一个数前面 后面类似不断加到前面   
+    }
+}

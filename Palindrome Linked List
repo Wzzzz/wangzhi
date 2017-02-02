@@ -36,5 +36,5 @@ public class Solution {
     }
     return true;
     //转置：取数组第一个数null 然后把第二个数加到第一个数前面 后面类似不断加到前面   
-    }
+    } 
 }

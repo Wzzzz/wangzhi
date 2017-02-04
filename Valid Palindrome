@@ -1,0 +1,18 @@
+//Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+//For example,
+//"A man, a plan, a canal: Panama" is a palindrome.
+//"race a car" is not a palindrome.
+
+public class Solution {
+    public boolean isPalindrome(String s) {
+       String act = s.replaceAll("[^A-Za-z0-9]","");  //通过正则表达式将字符串中除了大小写字母和0-9数字的符号去除
+       StringBuffer re = new StringBuffer(act);  //因为是测试字符串是否为回文，所以需将字符串转置 
+       StringBuffer re2 = new StringBuffer(act); //对字符串修改需用StringBuffer类
+       re2.reverse();                       //将字符序列反转
+       String rr =re.toString();               //返回序列终数据的字符串表示形式
+       String rr2 = re2.toString();    //equalsIgnoreCase方法为String方法，需转为String
+       System.out.println(rr);
+       System.out.println(rr2);
+       return rr.equalsIgnoreCase(rr2);   //equalsIgnoreCase方法为判断rr与rr2是否相等且忽略大小写
+    }
+}

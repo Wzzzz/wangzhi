@@ -14,5 +14,5 @@ public class Solution {
        System.out.println(rr);
        System.out.println(rr2);
        return rr.equalsIgnoreCase(rr2);   //equalsIgnoreCase方法为判断rr与rr2是否相等且忽略大小写
-    }
+    } 
 }

@@ -1,0 +1,27 @@
+//Two Sum
+//Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+//You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+//Example:
+//Given nums = [2, 7, 11, 15], target = 9,Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1].
+//给定一个数组 以及一个目标数 当数组两个数值相加等于目标数 返回这两个数值的序号 
+//注意本题只得出一个解 且不重复用同一个元素
+
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] result = new int[2];             //定义解为两的的整数数组
+        for(int i = 0 ;i < nums.length ;i++)             //通过遍历的方式找等于目标值的两个数（最先）
+         {
+           for(int k = i+1 ;k < nums.length ;k++)
+           {
+             if(nums[i] + nums[k] == target)
+              {
+              result[0] = i;
+              result[1] = k;
+              return result;     
+              }
+           }
+         }
+         return result;   //注意需要返回两次result  一次从for循环中返回 一次在函数中返回
+   }
+}

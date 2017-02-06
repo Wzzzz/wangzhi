@@ -1,0 +1,84 @@
+//Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+//The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+
+public class Solution {
+    public boolean isValid(String s) {
+    int num = s.length();
+    if(num == 0)
+    {return true;}
+    for(int i = 0 ;i<num ;i++)
+    { if(s.charAt(i) == '(')
+       { 
+         if(num - 1 == i)
+         return false;
+         else
+         i++;
+         if(s.charAt(i) != ')')
+         return false; 
+       }
+      else if(s.charAt(i) == '{')
+       {          
+         if(num - 1 == i)
+         return false;
+         else
+         i++;
+         if(s.charAt(i) != '}')
+         return false;  
+       }
+      else if(s.charAt(i) == '[')
+       { 
+         if(num - 1 == i)
+         return false;
+         else 
+         i++;
+         if(s.charAt(i) != ']')
+         return false;  
+       }
+      else return false;
+    }
+    return true;
+    }
+}
+ 
+出现错误Input:"([])"
+       Output:false
+       Expected:true
+没有考虑括号之间的包含关系,用堆栈的思路解决
+当存在左括号时，将括号压入栈
+当存在右括号时，将上一个括号从栈中提出 与这个左括号配对
+
+public class Solution {
+    public boolean isValid(String s) {
+    int num = s.length();
+    Stack<Character> aa = new Stack<Character>();  //给推入栈中数据定义数据类型Char
+    if(num == 0)                             //当输入为空时 输出true
+    {return true;}
+    for(int i = 0 ;i<num ;i++)   //字符串按位循环
+    {if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[')  //检测到字符串为左括号，推入栈中
+       { aa.push(s.charAt(i)); } 
+     else if(s.charAt(i) == ')')   //当为右括号  且栈不为空 推出栈中数据与右括号配对（类型需一致）         
+       { if(!aa.empty())
+        { if(aa.pop() != '(')   //如果栈中数据不为对应的右括号类型 则也为false
+          { return false; }}
+           else return false;  //如果此时栈空 则为false
+       }
+     else if(s.charAt(i) == '}')
+       { if(!aa.empty())
+       { if(aa.pop() != '{')  
+         { return false; }}
+         else return false;  
+       }
+     else if(s.charAt(i) == ']')
+      { if(!aa.empty())
+        { if(aa.pop() != '[')  
+         { return false; }
+        }
+        else return false;
+      }
+     else return false;
+    }
+     if(aa.empty())                 //最后循环结束检测栈中数据为空  当这三种“{” “(” “[”出现 则为false
+      return true;                  //通过全部检测 最后为ture
+     else return false; 
+    }
+}

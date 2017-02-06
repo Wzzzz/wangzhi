@@ -1,3 +1,48 @@
 //atoi的需求：如果前面有空格，需要剔除空格；剔除空格后，第一个字符串如果是+号，认为是正数；如果是-号，认为是负数；
 //后面的字符如果不是数字，那么返回0，如果是数字，返回实际的数字。遇到不是数字的字符，转换结束。
+//思路：首先通过charAt()方法获取string中char值
+//1、char值向数字值的转换 2、去除空格 3、判断正负号 4、考虑“+”“+-1”“-”这些情况 
+//5、循环累加得到结果 6、不可超过int阈值 7、结果的数据类型定义首先不能为int 建议double
+//public class Solution {
+    public int myAtoi(String str) {
+    int num = str.length();
+    if(str == null || num == 0)  //先判断字符串是否为空
+    { return 0;}                   
+    int i = 0;                  
+    int sign = 1;
+    double result = 0;
+    int k =0; 
+    while(str.charAt(i) == ' ')    //去除前面的空格 //charAt()方法返回指定索引位置的char值(ASCII表)  索引范围为0-length()-1  
+    {i++;}
+    if(str.charAt(i) == '-')       //判断去除空格后第一位是否有正负号 需考虑“+-1”这种情况  +-只判断一次
+    {sign = -1;
+    i++;}
+    else if(str.charAt(i) == '+')
+    {sign = 1;
+    i++;
+    }
+    if(num - i == 0)    //正负号之后 i指针向前进一位，需保证此时str前进一位不为空 有char值  考虑 “+” 这种情况
+    {return 0;}  
+    if(str.charAt(i) >='0' && str.charAt(i) <= '9')  //判断去除空格之后是否有为数字
+    {result = str.charAt(i)-'0';}             //无数字 返回0 如果有数字，将数字的char值减去0的char值，得到数字真实值
+    else
+    {return 0;} 
+    for(int j=i+1 ;j < num; j++)                  //循环判断 将后面数字不断加到结果中  注意结果不可超过int最大值
+      { 
+        if(str.charAt(j) >='0' && str.charAt(j) <= '9')     //当没有数字后 得出结果
+        {
+         result = str.charAt(j)-'0' + result*10 ;
+         if(result > Integer.MAX_VALUE)
+         break;
+        }
+        else 
+        {break;}  
+      }
+     result = result*sign;        //乘以正负号
+     if(result < Integer.MIN_VALUE)     //如果为负数 还需考虑最小值
+     {result = Integer.MIN_VALUE;}
 
+     return (int)result;           //强制将double结果转换为int类型   result不能直接为int类型因为需防止数值超出最大值  
+                                      
+    }
+}

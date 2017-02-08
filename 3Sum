@@ -37,3 +37,95 @@ public class Solution {
     return res;
     }
 }
+ 经过一次改进发现仍不行：
+ public class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {                 
+    List<List<Integer>> res = new ArrayList<List<Integer>>();
+    List<Integer> list = new ArrayList<Integer>(); 
+    Arrays.sort(nums);
+    for(int i = 0; i < nums.length-2 ; i++)
+    {
+     if(nums[i] > 0)  //跳出不可能实现的 因为已经排序 第一个大于0的必然不可能
+      break;
+     if( i>0 && nums[i] == nums[i-1])  //注意 先判断i>0再判断nums[i] == nums[i-1] 否则i指针出错 这个注意是排除重复的
+      {continue;}
+      for(int a = i+1; a < nums.length-1 ; a++)   
+      { 
+       if( a>i+1 && nums[a] == nums[a-1])     //去除重复的数
+         {continue;}
+       if(nums[a] > -nums[i])              //把大于-num[i]的值排除在外
+          {break;} 
+        for(int b = a+1; b < nums.length ; b++)
+        { 
+         if( b>a+1 && nums[b] == nums[b-1]) 
+         {continue;}
+         if(nums[b] > -nums[i]-nums[a])
+          {break;} 
+          if(nums[i]+nums[a]+nums[b] == 0)
+          {list.add(nums[i]);
+           list.add(nums[a]);
+           list.add(nums[b]);
+           res.add(new ArrayList(list));   
+           list.clear();                     
+           }                                
+        }
+       } 
+     }
+    return res;
+    }
+}
+参考别人思路  此时有两种方法 一种使用map 一种是利用夹逼方法实现：
+
+ map方法：
+ public class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {                 //int[] nums表示数组（整数数组int）
+    List<List<Integer>> res = new ArrayList<List<Integer>>();
+    List<Integer> list = new ArrayList<Integer>(); 
+    Arrays.sort(nums);
+    Map<Integer, List<Integer>> map = new HashMap<>();
+    for (int n = 0; n < nums.length; n++) {                       //这边定义一个对应数组中所有数值和下标的一个哈希map
+            int num = nums[n];                                    //数值对于key  下标对应value 一个数值可能有多个下标
+        if (map.get(num) == null) {
+                List<Integer> subscripts = new ArrayList<>();
+                subscripts.add(n);
+                map.put(num, subscripts);
+            } else {
+                map.get(num).add(n);
+            }
+        }
+    for(int i = 0; i < nums.length-2 ; i++)
+    {
+     if(nums[i] > 0)  //跳出不可能实现的 因为已经排序 第一个大于0的必然不可能
+      break;
+     if( i>0 && nums[i] == nums[i-1])  //注意 先判断i>0再判断nums[i] == nums[i-1] 否则i指针出错 这个注意是排除重复的
+      {continue;}
+      for(int a = i+1; a < nums.length-1 ; a++)   
+      { 
+       if( a>i+1 && nums[a] == nums[a-1])     //去除重复的数
+         {continue;}
+       if(nums[a] > -nums[i])              //把大于-num[i]的值排除在外
+          {break;} 
+        
+       List<Integer> subscripts = map.get(-nums[i]-nums[a]);  //提取出满足加上最后一个数为0条件的下标列表
+       if(subscripts == null)                        
+        {continue;}                                 
+        for(Integer b : subscripts)               //按顺序遍历这个下标列表 找到第一个满足条件的下标 即为nums[b]
+          if(b != i && b != a && b>a)    
+          {list.add(nums[i]);
+           list.add(nums[a]);
+           list.add(nums[b]);
+           res.add(new ArrayList(list));   
+           list.clear();
+           break;                             
+           }                                 
+        }
+       } 
+       return res;
+     }
+    }
+ 结果为Accepted 以上整体思路就是将第三个循环用map实现 避免第三层的遍历
+ 
+利用夹逼方法实现：
+ 
+ 
+ 

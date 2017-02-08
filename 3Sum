@@ -109,7 +109,7 @@ public class Solution {
        List<Integer> subscripts = map.get(-nums[i]-nums[a]);  //提取出满足加上最后一个数为0条件的下标列表
        if(subscripts == null)                        
         {continue;}                                 
-        for(Integer b : subscripts)               //按顺序遍历这个下标列表 找到第一个满足条件的下标 即为nums[b]
+        for(Integer b : subscripts)               //b为取值出列表中的值(下标号) 按顺序遍历这个下标列表 找到第一个满足条件的下标 即为nums[b]
           if(b != i && b != a && b>a)    
           {list.add(nums[i]);
            list.add(nums[a]);
@@ -126,6 +126,39 @@ public class Solution {
  结果为Accepted 以上整体思路就是将第三个循环用map实现 避免第三层的遍历
  
 利用夹逼方法实现：
- 
+  public class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {                 
+    List<List<Integer>> res = new ArrayList<List<Integer>>();
+    List<Integer> list = new ArrayList<Integer>(); 
+    Arrays.sort(nums);
+    for(int i = 0; i < nums.length-2 ; i++)
+    {
+     if(nums[i] > 0)  //跳出不可能实现的 因为已经排序 第一个大于0的必然不可能
+      break;
+     if( i>0 && nums[i] == nums[i-1])  //注意 先判断i>0再判断nums[i] == nums[i-1] 否则i指针出错 这个注意是排除重复的
+      {continue;}
+     int a = i+1; int b = nums.length-1; int sum = -nums[i];
+     while(a < b)
+       {
+         if(nums[a]+nums[b] == sum)
+          {list.add(nums[i]);
+           list.add(nums[a]);
+           list.add(nums[b]);
+           res.add(new ArrayList(list));   //！！！切记去掉 boolean bo = res.contains(list); 这步用来遍历所有值检查是否有重复 
+           list.clear();  
+           a++;
+           b--;
+          while (a < b && nums[a] == nums[a - 1]) a++;  //通过检查相邻的元素是否相同来避免相同的结果
+          while (a < b && nums[b] == nums[b + 1]) b--;  
+          }
+          else if(nums[a]+nums[b] > sum)
+           {b--;}
+          else{a++;}
+       }
+    }
+    return res;
+     } 
+     }
+    
  
  

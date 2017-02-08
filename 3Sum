@@ -26,14 +26,14 @@ public class Solution {
           {list.add(nums[i]);
            list.add(nums[a]);
            list.add(nums[b]);
-           boolean bo = res.contains(new ArrayList(list));
+           boolean bo = res.contains(list);
            if(!bo)
-           {res.add(new ArrayList(list));}
-           list.clear();
-          }
-        }
-       } 
-     }
+           {res.add(new ArrayList(list));}   //add(list)是错误的 ()中的list此时表示的是对象而不是数值   每次循环虽然对象list的值改变
+           list.clear();                     //但仍为同一个对象 
+           }                                 //解决办法就是在每次for循环中add(对象)前重新new对象  
+        }                                    //即add(new ArrayList(list))                                    
+       }                                     //可参考http://www.cnblogs.com/gongheng/p/5766764.html
+      }   
     return res;
     }
 }

@@ -145,7 +145,7 @@ public class Solution {
            list.add(nums[a]);
            list.add(nums[b]);
            res.add(new ArrayList(list));   //！！！切记去掉 boolean bo = res.contains(list); 这步用来遍历所有值检查是否有重复 
-           list.clear();  
+           list.clear();                   //不去掉则运算时间超出
            a++;
            b--;
           while (a < b && nums[a] == nums[a - 1]) a++;  //通过检查相邻的元素是否相同来避免相同的结果

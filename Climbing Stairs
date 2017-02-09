@@ -1,0 +1,33 @@
+//You are climbing a stair case. It takes n steps to reach to the top.
+//Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+//Note: Given n will be a positive integer.
+//爬楼梯问题：一共n级楼梯 每次走一步或两步 一共有多少种走法
+//动态规划问题：S(n)表示n级楼梯的走法个数 S(n-1)表示n-1级楼梯走法个数  
+//因为每次走步有一步或两步 即S(n)=S(n-1)+S(n-2) 表示n级楼梯的走法个数等于第一次走一步或者两步下两种情况的类和  
+//第一步跨1级台阶，剩下的台阶数为n-1, 也就是说这种情况下（即第一步跨1级台阶的）走法相当于S(n-1)
+//第一步跨2级台阶，剩下的台阶数为n-2，也就是说如果第一步跨2级台阶的走法相当于S(n-2)
+//两种情况累加 得到递推关系式S(n)=S(n-1)+S(n-2)
+//public class Solution {
+    public int climbStairs(int n) {
+     int i = 2;
+     int a = 1;
+     int b = 2;
+     if(n==0)
+     return 0;
+     if(n==1)
+     return a;
+     if(n==2)
+     return b;
+     while(i<n)
+     { if(a<b)
+      {i++;
+       a=a+b;}
+      else
+      {i++;
+       b=a+b;}
+     }
+     if(a<b)
+      return b;
+     else return a;
+    }
+}

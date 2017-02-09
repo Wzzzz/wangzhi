@@ -1,0 +1,25 @@
+//Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+//给定两个字符串needle和haystack  当needle字符串完全匹配haystack字符串中一段内容时 返回needle匹配haystack字符串第一个字符的索引，
+//其他情况返回-1，另外当needle为null时 返回0
+public class Solution {
+    public int strStr(String haystack, String needle) {
+     if(needle.length() == 0)                          //考虑needle为null时情况
+        return 0;
+     for(int i = 0; i<haystack.length(); i++)             //两个嵌套循环完成  一个指针走haystack 另一个指针走needle判断是否有完全匹配
+      {  int a = i;
+         int k = 0;
+         if(needle.length() > haystack.length()-i)  //考虑到当匹配到haystack剩下的字符串长度小于needle字符串长度 即可以认为无法匹配 返回-1
+            return -1;
+         while(haystack.charAt(a) == needle.charAt(k))
+            { a++;
+              if(k<needle.length()-1)
+              {k++;}
+              else 
+              {return i;}
+            }
+      }
+      return -1;
+    }
+}
+
+ 思考：参考别人 用haystack.substring(a,b).equals(needle)来作判断 似乎仅用一个for循环即可

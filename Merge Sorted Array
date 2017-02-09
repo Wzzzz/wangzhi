@@ -20,3 +20,9 @@ public class Solution {
 //另外参考别人的思路 排序的方法不变
 //但是在将nums2加到nums1中时 不需要用循环 可用下面语句System.arraycopy(nums2, 0, nums1, m, n);
 //将源数组nums2中0到n-1位置复制到目标数组nums1中m位置
+//举个例子 输入如下 
+num1s = [3,7,10,0,0,0,0,0]
+m=3
+nums2 = [1,2,3,4,5]
+n=5
+结果 nums1=[1,2,3,3,4,5,7,10] 

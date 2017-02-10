@@ -112,3 +112,5 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     return d.next;      因为d=p p不断改变 d不变 得到最终值  用d.next 因为d.val = 0
  }
 }
+
+总结：给listNode的p的value赋值方法 ListNode p = new ListNode(value)  然后p.next = ...可以后续定义

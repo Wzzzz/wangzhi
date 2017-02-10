@@ -89,3 +89,26 @@ public class Solution {
       return l3;      //最后返回l3和l4一样 对应没有进位且两个链表的长度一样
      }
     }
+
+ 参考别人的思路：（很简单）
+public class Solution {
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    int carry = 0;
+    ListNode p = new ListNode(0);     p=d=[val]  其next指针没有定义
+    ListNode d = p;                 
+    while (l1 != null || l2 != null || carry != 0) {   //l1或者l2或者carry有一个不等于0 循环
+        if (l1 != null) {                      //l1不为空 则carry加上l1的值 
+            carry = carry + l1.val;
+            l1 = l1.next;
+        }
+        if (l2 != null) {                   //l2不为空 则carry加上l2的值
+            carry = l2.val + carry;
+            l2 = l2.next;
+        }
+        p.next = new ListNode(carry%10);  //求余 求出carry中个位数 加到p的下一位  ！！注：new ListNode()括号中表示当个点的值val
+        carry = carry/10;  //除法 得出进位信息加到carry（0或者1）
+        p = p.next;         p走下一位
+    }
+    return d.next;      因为d=p p不断改变 d不变 得到最终值  用d.next 因为d.val = 0
+ }
+}

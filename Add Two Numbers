@@ -5,10 +5,8 @@
 //You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 //Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 //Output: 7 -> 0 -> 8
-//用两个链表表示两个非负整数2->4->3表示243， 
-
-
-//
+//用两个链表表示两个非负整数 2->4->3表示342，5->6->4表示465  数值342+465=807 807的表示为7 -> 0 -> 8
+//简单说就是两个链表的累加（注意进位） 
 * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
@@ -18,21 +16,21 @@
  //
 public class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-     int s = 0;
-     int d = 0;
-     int q = 0;
-     ListNode l3 = l1;
-     ListNode l4 = l2;
-     ListNode l5 = new ListNode(0);
-     while(l1 != null && l2 != null)
+     int s = 0;            //s表示两个链表单点值的的和l1.val + l2.val
+     int d = 0;            //d表示进位符号
+     int q = 0;            //q表示是从l1加到l2还是从l2加到l1
+     ListNode l3 = l1;     //更新链表的值并保存下来
+     ListNode l4 = l2;  
+     ListNode l5 = new ListNode(0);  //利用一个新的数组可以创造进位的最后一个1
+     while(l1 != null && l2 != null)  //l1和l2按节点顺序向后走，当其中两个都存在节点值即累加上并保持进位
      {
      if(l1.val + l2.val + d < 10)
-     { s = l1.val + l2.val;
+     { s = l1.val + l2.val;                 
        l1.val = s + d;
        l2.val = s + d;
        d = 0;     
      }
-     else if(l1.val + l2.val + d >= 10)
+     else if(l1.val + l2.val + d >= 10) 
      { s = l1.val + l2.val - 10;
        l1.val = s + d;
        l2.val = s + d;
@@ -41,8 +39,8 @@ public class Solution {
      l1 = l1.next;
      l2 = l2.next;
      }
-     if(l1 != null && l2 == null)
-     { q = 0;
+     if(l1 != null && l2 == null)   //其中一个链表比另一个链表短 将长的链表的节点值加到短的链表节点值
+     { q = 0;                       //注意每一位到10进位  注意1+999 =1000这种进位
        while(l1.val+d == 10)
        {l1.val = 0;
         l1=l1.next;
@@ -56,7 +54,7 @@ public class Solution {
         return l3;
        }
       }
-     if(l1 == null && l2 != null)     
+     if(l1 == null && l2 != null)       //注意1+9 =10这种进位  需要额外定义一个listnode的值为1,并将链表.next指向这个单链表
      {
       q = 1; 
       while(l2 != null && l2.val == 10-d)
@@ -88,6 +86,6 @@ public class Solution {
         l4.next = l5;
         return l6;}
       }
-      return l3;
+      return l3;      //最后返回l3和l4一样 对应没有进位且两个链表的长度一样
      }
     }

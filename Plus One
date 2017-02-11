@@ -1,0 +1,27 @@
+public class Solution {
+    public int[] plusOne(int[] digits) {
+     int i = 0;
+     int m = digits.length - 1;
+     digits[m] = digits[m] + 1;
+     while(m != -1)
+     {
+        digits[m] = digits[m] + i;
+        i = digits[m]/10;
+        digits[m] = digits[m]%10;
+        m = m-1;
+     }
+     if (i==1)
+     {
+     int[] k = new int[digits.length+1]   ;
+     k[0]=1;
+     int n = 0;
+     while(n !=digits.length)
+      { k[n+1] = digits[n];
+        n++;
+      }
+     return k;         
+     }
+     else 
+     return digits;
+    }
+}

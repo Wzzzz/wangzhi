@@ -1,3 +1,4 @@
+首先想到通过int 以2为进位  整除和取余 再将int转为string 问题在于int有上下限 当int值到上下限则不再增加或减少 
 public class Solution {
     public String addBinary(String a, String b) {
       int n = a.length()-1;

@@ -1,0 +1,28 @@
+public class Solution {
+    public String addBinary(String a, String b) {
+      int n = a.length()-1;
+      int m = b.length()-1;
+      int i = 0;
+      int k = 1;
+      double res = 0;
+      while(n != -1 || m != -1 || i != 0)
+      {
+       if(n != -1)  
+        {
+         i += a.charAt(n)-'0';
+         n=n-1;
+        }
+       if(m != -1) 
+        {
+         i +=  b.charAt(m)-'0';
+         m=m-1;
+        }  
+       res = res+(i%2)*k;//求余
+       i = i/2 ;//除法
+       k = k*10;
+      }
+      int q = (int)res;         //错在int整型的范围有限 而String是无限 所以把int整形转换为string这种方法会遇到上下界的问题
+      String s = Integer.toString(q);
+      return  s;
+    }
+}

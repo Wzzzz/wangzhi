@@ -1,11 +1,50 @@
-首先想到通过int 以2为进位  整除和取余 再将int转为string 问题在于int有上下限 当int值到上下限则不再增加或减少 
+首先想到通过int 以2为进位  整除和取余 再将int转为string 问题在于int有上下限 当int值到上下限则不再增加或减少 下面是错误的:
 public class Solution {
     public String addBinary(String a, String b) {
       int n = a.length()-1;
       int m = b.length()-1;
-      int i = 0;
+      int i = 0;  //i表示累和
       int k = 1;
       double res = 0;
+      while(n != -1 || m != -1 || i != 0)     //只要n和m不等于-1且进位不等于0同时发生 进入循环
+      {
+       if(n != -1)                   //累和i加上a的值
+        {
+         i += a.charAt(n)-'0';
+         n=n-1;
+        }
+       if(m != -1)                   //累和i加上b的值
+        {
+         i +=  b.charAt(m)-'0';
+         m=m-1;
+        }  
+       res = res+(i%2)*k;//求余      //累和i得到除以2的余 即其位数值
+       i = i/2 ;//除法               //除以2得到其进位
+       k = k*10;
+      }
+      int q = (int)res;         //错在int整型的范围有限 而String是无限 所以把int整形转换为string这种方法会遇到上下界的问题
+      String s = Integer.toString(q);
+      return  s;
+    }
+}
+ //改进一下方法：（思路）因为string不能改变 但是stringbuffer类中有insert和append方法可以在字符串中插入字符 
+ //因此考虑定义一个stringbuffer，用insert(int offset,int i)或者append()方法实现，
+ //注意append内可以填许多种型, 
+ //StringBuilder append(double d)
+ //StringBuilder append(float f)
+ //StringBuilder append(int i)
+ //StringBuilder append(long lng)
+ //StringBuilder append(Object obj)
+ //StringBuilder append(String str) 
+//因为append将参数不断加在字符串的末尾 而进位是进在前面 还需要reverse()反转 
+ //且insert(0,int i)则可以直接将int参数加在字符串0位置(即前面)
+ //正确方法：
+ public class Solution {
+    public String addBinary(String a, String b) {
+      StringBuffer re = new StringBuffer();
+      int n = a.length()-1;
+      int m = b.length()-1;
+      int i = 0;
       while(n != -1 || m != -1 || i != 0)
       {
        if(n != -1)  
@@ -18,12 +57,11 @@ public class Solution {
          i +=  b.charAt(m)-'0';
          m=m-1;
         }  
-       res = res+(i%2)*k;//求余
-       i = i/2 ;//除法
-       k = k*10;
+       re.append(i%2) ;//求余 同上      这行可改为 re.insert(0,i%2);并且同时去掉62行re.reverse(); 同样AC
+       i = i/2 ;//除法 同上
       }
-      int q = (int)res;         //错在int整型的范围有限 而String是无限 所以把int整形转换为string这种方法会遇到上下界的问题
-      String s = Integer.toString(q);
-      return  s;
+      re.reverse();  //因为加在末尾 需反转
+      String bb = re.toString();  //注意将StringBuffer转为string
+      return  bb;
     }
 }

@@ -37,11 +37,23 @@ public class Solution {
  //StringBuilder append(Object obj)
  //StringBuilder append(String str) 
 //因为append将参数不断加在字符串的末尾 而进位是进在前面 还需要reverse()反转 
- //且insert(0,int i)则可以直接将int参数加在字符串0位置(即前面)
- //正确方法：
+ //且insert(0,int i)则可以直接将int参数加在字符串0位置(即前面) 参考下面insert方法
+ // StringBuilder	insert(int offset, boolean b) 
+ StringBuilder	insert(int offset, char c) 
+ StringBuilder	insert(int offset, char[] str) 
+ StringBuilder	insert(int index, char[] str, int offset, int len) 
+ StringBuilder	insert(int dstOffset, CharSequence s) 
+ StringBuilder	insert(int dstOffset, CharSequence s, int start, int end) 
+ StringBuilder	insert(int offset, double d) 
+ StringBuilder	insert(int offset, float f) 
+ StringBuilder	insert(int offset, int i) 
+ StringBuilder	insert(int offset, long l) 
+ StringBuilder	insert(int offset, Object obj) 
+ StringBuilder	insert(int offset, String str) 
+ //正确解法：
  public class Solution {
     public String addBinary(String a, String b) {
-      StringBuffer re = new StringBuffer();
+      StringBuffer re = new StringBuffer();//定义一个空的StringBuffer
       int n = a.length()-1;
       int m = b.length()-1;
       int i = 0;

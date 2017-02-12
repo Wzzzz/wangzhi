@@ -1,3 +1,7 @@
+//Given a non-negative integer represented as a non-empty array of digits, plus one to the integer
+//You may assume the integer do not contain any leading zero, except the number 0 itself.
+//The digits are stored such that the most significant digit is at the head of the list.
+
 public class Solution {
     public int[] plusOne(int[] digits) {
      int i = 0;
@@ -9,10 +13,10 @@ public class Solution {
         i = digits[m]/10;
         digits[m] = digits[m]%10;
         m = m-1;
-     }
-     if (i==1)
+     }     
+     if (i==1)                                  
      {
-     int[] k = new int[digits.length+1]   ;
+     int[] k = new int[digits.length+1];
      k[0]=1;
      int n = 0;
      while(n !=digits.length)
@@ -25,3 +29,10 @@ public class Solution {
      return digits;
     }
 }
+//最后一段可用这种方式 不必再设一个k循环赋值  直接给digits定义digits.length+1长度 并在0位定义1
+//   if (i==1)
+     {
+     digits = new int[digits.length+1]   ;
+     digits[0]=1;
+     }
+     return digits;

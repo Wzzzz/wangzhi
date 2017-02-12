@@ -1,42 +1,58 @@
-Reverse digits of an integer.
+//Reverse digits of an integer.
+//反转一个整数的数字，下面举例：
+//Example1: x = 123, return 321
+//Example2: x = -123, return -321
 
-Example1: x = 123, return 321
-Example2: x = -123, return -321
-
-Have you thought about this?
-Here are some good questions to ask before coding. Bonus points for you if you have already thought through this!
-If the integer's last digit is 0, what should the output be? ie, cases such as 10, 100.Did you notice that the 
-reversed integer might overflow? Assume the input is a 32-bit integer, then the reverse of 1000000003 overflows. 
-How should you handle such cases?
-For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
-
-Note:
-The input is assumed to be a 32-bit signed integer. Your function should return 0 when the reversed integer overflows.
-
+//Have you thought about this?
+//Here are some good questions to ask before coding. Bonus points for you if you have already thought through this!
+//If the integer's last digit is 0, what should the output be? ie, cases such as 10, 100.Did you notice that the 
+//reversed integer might overflow? Assume the input is a 32-bit integer, then the reverse of 1000000003 overflows. 
+//How should you handle such cases?
+//For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
+//首先需考虑1000 反转后是1而不是0001  输入整数不超过Integer.MAX_VALUE且反转后整数不能超过Integer.MAX_VALUE且不小于Integer.MIN_VALUE
+//比如1000000003反转会超过阈值 这时返回0
+//Note:
+//The input is assumed to be a 32-bit signed integer. Your function should return 0 when the reversed integer overflows.
+//思路：涉及到反转 想到了StringBuffer方法中的reverse()方法 但是输入为int类型 首先把int转为string 再转为stringbuffer 反转后再转回
+//int类型  其中用到了String.valueOf(int x)方法将int数x转为string  以及 Double.parseDouble(s)将字符串s转为double类型的数
 public class Solution {
     public int reverse(int x) {
     if(x>=0)    
-    {String s=String.valueOf(x);
-    StringBuffer ss = new StringBuffer(s);
-    ss.reverse();
-    s =ss.toString();
-    double re = Double.parseDouble(s);
-    if(re<Integer.MAX_VALUE)
-    return (int)re;
+    {String s=String.valueOf(x);             //int数转为string
+    StringBuffer ss = new StringBuffer(s);   //string转为StringBuffer
+    ss.reverse();                            //反转
+    s =ss.toString();                        //StringBuffer再转为String
+    double re = Double.parseDouble(s);       //用Double类型是防止反转后数值超出int阈值 程序出现错误 将字符串转为double数值
+    if(re<Integer.MAX_VALUE)                 //判断反转后数值是否超过阈值 是否返回0
+    return (int)re;                          //强制将double转为int
     else return 0;    
     }
     else
-    {if(x < -Integer.MAX_VALUE)
+    {if(x < -Integer.MAX_VALUE)              //当x小于0 对x取负 但是当x刚好等于Integer.MIN_VALUE 取负会超过Integer.MAX_VALUE！！
       return 0;
-    String s=String.valueOf(-x);
+    String s=String.valueOf(-x);               
     StringBuffer ss = new StringBuffer(s);
     ss.reverse();
-    ss.insert(0,'-');
+    ss.insert(0,'-');                        //字符串在0位置插入‘-’符号
     s =ss.toString();
     double re = Double.parseDouble(s);
     if(re>Integer.MIN_VALUE)
     return (int)re;
     else return 0;    
     }
+    }
+}
+//参考别人思路： 
+public class Solution {
+    public int reverse(int x) {
+        long result =0;
+        while(x != 0)
+        {
+            result = (result*10) + (x%10);
+            if(result > Integer.MAX_VALUE) return 0;
+            if(result < Integer.MIN_VALUE) return 0;
+            x = x/10;
+        }
+        return (int)result;  
     }
 }

@@ -36,3 +36,9 @@ public class Solution {
      digits[0]=1;
      }
      return digits;
+// 另外不用循环 也可使用System.arraycopy方法 实现数组复制   
+     if (i==1){
+     int[] k = new int[digits.length+1];
+     k[0] = 1;
+     System.arraycopy(digits,0,k,1,digits.length);
+     }

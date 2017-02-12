@@ -42,7 +42,8 @@ public class Solution {
     }
     }
 }
-//参考别人思路： 
+//参考别人思路： 先定义64位long的result 对输入值x进行循环 每一次取x除10的余且对x除以10处理 即从最低位到最高位每次取1位数加到result
+//result每次向前进位 即*10 再加上取的x的位  注意判断是否超过阈值
 public class Solution {
     public int reverse(int x) {
         long result =0;

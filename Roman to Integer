@@ -51,3 +51,4 @@ public class Solution {
     return res;
     }
 }
+ //注：switch(参数)  case1值： 语句 break;.......

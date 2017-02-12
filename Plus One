@@ -29,7 +29,7 @@ public class Solution {
      return digits;
     }
 }
-// 别人的方法 最后一段可用这种方式 不必再设一个k循环赋值  直接给digits定义digits.length+1长度 并在0位定义1
+// 别人的方法 最后一段可用这种方式 不必再设一个k循环赋值  直接给digits重新定义一个digits.length+1长度的数组 并在0位定义1 即10000.....
 //   if (i==1)
      {
      digits = new int[digits.length+1]   ;

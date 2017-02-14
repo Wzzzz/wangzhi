@@ -1,0 +1,31 @@
+//The count-and-say sequence is the sequence of integers beginning as follows:
+//1, 11, 21, 1211, 111221, ...
+//1 is read off as "one 1" or 11.
+//11 is read off as "two 1s" or 21.
+//21 is read off as "one 2, then one 1" or 1211.
+//Given an integer n, generate the nth sequence.
+//Note: The sequence of integers will be represented as a string.
+//这题难理解 主要是根据n值返回不同值（低轨） n=0或者1 返回1  n=2 返回1个1（11） n=3 返回两个1（21） n=4 返回一个2一个1（1211） 
+//具体来说根据 返回上一个字符串每个字符的连续出现个数+字符  递归判断n-1即可 
+public class Solution {
+    public String countAndSay(int n) {
+    if(n == 1 || n == 0)           //n=0或者1 返回1  
+    return "1";
+    String s = countAndSay(n-1);  //递归获取上个n-1值字符串
+    StringBuffer ss = new StringBuffer();
+    int m = 1;
+    int num = s.length();
+    for(int i = 1;i<num;i++)                //进入字符的循环 
+    { if(s.charAt(i)==s.charAt(i-1))      //出现连续数 m值累加
+        m++;
+      else
+       {ss.append(m);                    //将连续数添加到字符串末尾
+        ss.append(s.charAt(i-1));        //将字符添加
+        m = 1;}
+    }
+     ss.append(m);
+     ss.append(s.charAt(num-1));
+     String a = ss.toString();
+     return a;
+  } 
+}

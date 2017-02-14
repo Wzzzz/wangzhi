@@ -1,0 +1,27 @@
+//Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
+//Do not allocate extra space for another array, you must do this in place with constant memory.
+//For example,
+//Given input array nums = [1,1,2],
+//Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. 
+//It doesn't matter what you leave beyond the new length.
+//给一个已排序的数组 移除重复的元素 保留第一次出现的元素  然后返回新长度
+//这里题意的理解我有很多问题  最后Expected answer其实不是程序的return
+//只要定义给第一个出现的元素 忽略重复出现的元素 然后记录不重复出现元素的长度
+//推测 可能最后返回的Expected answer是结合nums数组[]加上不重复出现元素的长度m
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+    int n = nums.length;
+    int m = 1;
+    if(n == 0)
+     return 0;
+    for(int i = 1; i<n; i++)
+    {
+     if(nums[i] != nums[i-1])
+      {
+       nums[m] = nums[i];
+       m++;
+      }
+    }
+    return m;
+  }
+}

@@ -1,0 +1,25 @@
+//Determine whether an integer is a palindrome. Do this without extra space.
+//Some hints:
+//Could negative integers be palindromes? (ie, -1)
+//If you are thinking of converting the integer to string, note the restriction of using extra space.
+//You could also try reversing an integer. However, if you have solved the problem "Reverse Integer", 
+//you know that the reversed integer might overflow. How would you handle such case?
+//借鉴别人思路 不能用int转为string方法 只能用数学方法
+//这里用循环res = res*10+x%10;x = x/10;这种方法 高低位按位进行反转 
+//例如int x = 12321 res不断更新值 1 12 123 从int x的低(个)位—>高位
+//同时x不断除10 1232 123 12  最后进行比较res与x
+public class Solution {
+    public boolean isPalindrome(int x) {
+    if(x == 0)                    
+    return true;                //1.x为负 返回false  
+    if(x<0 || x%10 == 0)        //2.x除10余0 一定是 x...0这种结构 返回的一定是false
+    return false;               //0*10不能进位 但是出现100这种情况 还会出现true 需要考虑这一点加上判断语句返回false
+    int res = 0;                //判断语句是个位是0则返回false 但是对于x=0这种情况 又应该返回true 也需考虑    
+    while(x>res)
+    {res = res*10+x%10;               
+     x = x/10;}          
+    if(x == res || x == res/10)
+    return true; 
+    else return false;    
+    }
+}

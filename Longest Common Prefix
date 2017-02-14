@@ -26,3 +26,18 @@ public class Solution {
      return ss;
   }
 }
+
+//别人的方法(很好)：
+public String longestCommonPrefix(String[] strs) {
+    if(strs == null || strs.length == 0)    return "";
+    String pre = strs[0];
+    int i = 1;
+    while(i < strs.length){
+        while(strs[i].indexOf(pre) != 0)                    //string1.indexOf(string2)   返回指定2子字符串在1字符串中第一次出现处的索引 
+            pre = pre.substring(0,pre.length()-1);          //如果不是从0位开始  pre删掉末置位     
+        i++;                                                //substring(int beginIndex, int endIndex) 返回一个新字符串
+    }                                                       //截取字符串一部分  pre是此字符串pre的一个子字符串。    
+    return pre;
+}
+
+//总体思路：将strs[0]与所有的其他字符串比较 判断strs[0]是否是其他字符串0开始的子字符串  如果不是  strs[0]减去末置位

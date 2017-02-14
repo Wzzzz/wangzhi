@@ -1,0 +1,28 @@
+//Write a function to find the longest common prefix string amongst an array of strings.
+//给定一组字符串  找到这组字符串共有的最长前缀  字符串可表示为["aa","se","awdx","axv"]  
+//思路：遍历这组字符串的字符 从左到右按位遍历字符char 对于每个字符判断是否对于所有字符串数组都一样 
+
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+    int num = strs.length;
+    int n = 0;  
+    if(num == 0 || strs[0].length() == 0)  //判断[][""]这两种情况 都需返回""
+      return "";
+    char[] a = strs[0].toCharArray();      //将字符串转为char型数组
+    StringBuffer s = new StringBuffer();   //StringBuffer类有append方法
+    for(int i = 0; a[n] == strs[i].charAt(n); i++) //判断对于一个字符  是否对于所有的字符串的该位都是一样
+     {
+      if(i == num-1)                             //当循环到最后一个字符串 将字符串进一位
+      { s.append(a[n]);                          //这个字符加到结果中
+        if(n == strs[0].length()-1)              //当这个字符到第一个字符串的最后一位 需要直接返回结果  主要针对单一字符串
+        break;                                   //例：["a"]这种情况 无法判断下一个字符串长度（没有下一个字符串）
+        n++;
+        i = 0;      
+      }
+      if(n > strs[i+1].length()-1)               //对于进位的n超过了下一个字符串长度 直接返回结果
+         break;
+     }
+     String ss = s.toString();              //StringBuffer转为String
+     return ss;
+  }
+}

@@ -28,3 +28,26 @@ public class Solution {
      return sum1;
      }    
 }
+//参考别人思路：对于一个数组[a,b,c,d,e,f]我们从两方面判断 从a开始累加后面的值 并记录下最大值 当发现累加值小于等于0时，就可以将前面累加值
+//抛弃 因为加上前面的累和 反而减少整体的值   重点在于接下来 继续走根据这种方法首先一定能找到解的左边界 接着从左边界向右 用一个累和
+//循环即可找到右边界 即为正确解。
+public class Solution {
+    public int maxSubArray(int[] nums) {  ////动态规划  判断n个数组中最大值 = 判断n-1个数组中最大值 + 这一个数
+    int i = 1;
+    int n = nums.length;
+    int sum = nums[0];
+    int max = nums[0];
+    if(n==1)
+    return nums[0];
+    while(i<n)             //[-2,-1]  n=2 i=0
+     {                                          //
+      if(nums[i]<sum+nums[i])
+      sum = sum+nums[i];
+      else sum = nums[i];
+      if(max<sum)
+      max = sum;
+      i++;
+     }
+     return max;
+    }
+}

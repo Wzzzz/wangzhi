@@ -1,0 +1,30 @@
+思路  首先想到暴力解 结果对的 但是有O^3复杂度 提交出现Time Limit Exceeded，解法用了3个循环 一个循环求得一个数组解 另外两个指针从分别从0开始 遍历即为
+[0,1] [0,1,2] [0,1,2,3] [0,1,2,3,4] [1] [1,2] [1,2,3] [1,2,3,4] [2] [2,3].... ：
+public class Solution {
+    public int maxSubArray(int[] nums) {  ////动态规划  判断n个数组中最大值 = 判断n-1个数组中最大值 + 这一个数
+    int i = 0;
+    int n = nums.length;
+    int sum2 = nums[0];
+    if(n==1)
+    return nums[0];
+    while(i<n)             //[-2,-1]  n=2 i=0
+     {int m = i;           //m=0    
+      while(m<n){          //m<2
+      if(sum2<sum(nums,i,m))
+      sum2 = sum(nums,i,m);
+      m++;
+      }
+      i++;
+     }
+     return sum2;
+    }
+     public int sum(int[] nums, int i,int n){
+     int sum1 = nums[i];
+     while(i<n)
+      {
+         i++; 
+         sum1 = sum1 + nums[i];
+      }
+     return sum1;
+     }    
+}

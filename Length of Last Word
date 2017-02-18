@@ -17,3 +17,6 @@ public class Solution {
         return n; 
     }
 }
+
+//别人思路 一步解决  trim()去掉字符串两边空格  lastIndexOf(" ")返回最后一个空格索引  总长减去最后一个空格索引+1 = 最后一个单词长度 
+s.trim().length()-s.trim().lastIndexOf(" ")-1;

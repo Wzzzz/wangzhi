@@ -10,8 +10,7 @@
  *     ListNode(int x) { val = x; }
  * }
  //head单点赋给b b再赋给c 循环中判断head前后值是否一样 然后head往前走 1.当不一样时 head再给b b前进  2.当一样 head前进即可
- //注意 必须在最后将b.next指针指向null 否则最后重复出现的元素仍会保留 因为head在前进时 c=b=head仍会前进 但是将b.next = null
- //可解决
+ //注意 必须在最后将b.next指针指向null 否则最后重复出现的元素仍会保留 因为head在前进时 c=b=head仍会前进 但是将b.next = null可解决
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if(head == null)
@@ -31,7 +30,15 @@ public class Solution {
         else 
          head = head.next;
         }
-        b.next = null;  //！！！这里重点  head=head.next时 c也会改变  但是b.next = xxx 可以优先于head直接改变c
+        b.next = null;  //！！！这里重点  head=head.next时 c也会改变 但是b.next = xxx 可以优先于head直接改变c  如果改成c.next=null则只输出一个值
         return c;
     }
 }
+//！！！！！！！！
+用指针解释一下 c=b=head      
+head: □->□->□->□->□->□->□->□->□->□
+b   : □  b指向head
+c   : □  c指向b 
+//首先head向前进 当出现相同值 head走但是b不走 当出现不同值时 将b指针立刻指向这个head的不同值 
+//这样如果最后出现一系列相同值 b指针没有改变 则会保留剩余的head的值 
+//所以最后要设置b的指针指向null 将b后面的head值舍弃掉 最后c=b得到b的完整路径    

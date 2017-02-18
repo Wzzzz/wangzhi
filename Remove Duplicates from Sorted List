@@ -1,0 +1,37 @@
+//Given a sorted linked list, delete all duplicates such that each element appear only once.
+//For example
+//Given 1->1->2, return 1->2.
+//Given 1->1->2->3->3, return 1->2->3.
+//给一个链表 去掉重复的元素 返回新的一个链表
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ //head单点赋给b b再赋给c 循环中判断head前后值是否一样 然后head往前走 1.当不一样时 head再给b b前进  2.当一样 head前进即可
+ //注意 必须在最后将b.next指针指向null 否则最后重复出现的元素仍会保留 因为head在前进时 c=b=head仍会前进 但是将b.next = null
+ //可解决
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null)
+         return head;
+        if(head.next == null)
+         return head;
+        ListNode b = head;
+        ListNode c = b;
+        while(head.next != null)
+        {
+        if(head.val != head.next.val)
+         {
+          head = head.next;
+          b.next = head;
+          b = b.next;      
+         }
+        else 
+         head = head.next;
+        }
+        b.next = null;  //！！！这里重点  head=head.next时 c也会改变  但是b.next = xxx 可以优先于head直接改变c
+        return c;
+    }
+}

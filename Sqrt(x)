@@ -1,0 +1,36 @@
+//Implement int sqrt(int x).
+//Compute and return the square root of x.
+//求解一个整形数的平方根
+结合Math.sqrt(double)方法可解 注意数据类型的转换 在数值前加上(数据类型)即可 
+public class Solution {
+    public int mySqrt(int x) {
+     double b = Math.sqrt((double)x); // Math.sqrt(double a)  
+     return (int)b;
+    }
+}
+//上面方法虽然能解 但达不到题目锻炼效果 下面用数学方法解：
+public class Solution {
+    public int mySqrt(int x) {
+     long b = (long)x;
+     if(b==0 || b==1)
+      return (int)b;
+     if(b==4)
+      return 2;
+     long a = b/2;
+     while(true)
+     { if(a*a<=b)
+         {a++;
+         if(a*a>b)
+          {a--;
+           break;}
+         if(a*a==b)
+           break;
+         }
+       if(a*a>b)
+        {if(a == 1)
+           a = 1;
+         else a = a/2;}
+     }   
+     return (int)a;
+    }
+}

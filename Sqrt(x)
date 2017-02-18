@@ -12,6 +12,7 @@ public class Solution {
 //自己解题思路 
 //二分法 将x除以2 判断其平方是否大于x  大于x再除以2 不断除 直到其平方小于x 然后不断加1 直到其平方等于或大于x(注意大于x的话解值还要减一)
 //注意 因为x的平方可能会超过int的最大上限  所以先转为long型(64位) 再转回int。
+//a*a<=b这些判断条件可以换成a<=b/a 这样就不用转换成long类型 
 public class Solution {
     public int mySqrt(int x) {
      long b = (long)x;

@@ -1,0 +1,24 @@
+//Given two binary trees, write a function to check if they are equal or not.
+//Two binary trees are considered equal if they are structurally identical and the nodes have the same value.
+//给两个二叉树 判断这两个二叉树是否完全一样（结构和数值）
+//自己思路不对 碰到二叉树这种遍历题 用递归的思想做！！！！！！
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+     if(q==null&&p==null)
+       return true;
+     if((q==null&&p!=null)||(p==null&&q!=null)||(q.val!=p.val))
+       return false;
+     return isSameTree(p.right,q.right)&&isSameTree(p.left,q.left);       
+}
+}
+//参考了别人思路  ！！！方法isSameTree判断这一个点是否相等 相等返回true 不相等返回false 且最终返回值是遍历该点一下所有点的和&& 
+//即必须二叉树中所有点判断都相等 才返回true 

@@ -1,0 +1,43 @@
+//Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+//For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+//But the following [1,2,2,null,3,null,3] is not:
+    1
+   / \
+  2   2
+   \   \
+   3    3
+//Note:
+//Bonus points if you could solve it both recursively and iteratively.
+//给一个二叉树 检查是否对称 可以用递归和迭代方法
+//先考虑recursively递归方法：考虑将一个二叉树分成两个二叉树部分进行比较 左边与右边进行比较 右边与左边比较 递归下去即可
+//用equal(p.right,q.left)&&equal(p.left,q.right)这种方式 只有两个二叉树所有对称节点都相同ture才会返回ture 有一个false则是false
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ /
+public class Solution {
+    public boolean isSymmetric(TreeNode root) 
+    { 
+      if(root == null)
+       return true;
+      TreeNode p = root.right;
+      TreeNode q = root.left;    
+      return equal(p,q);
+    }
+    public boolean equal(TreeNode p,TreeNode q)
+    { if(p == null && q == null)
+        return true;
+      if((p!= null && q == null)||(p == null && q != null)||(p.val != q.val))
+        return false;
+      return equal(p.right,q.left) && equal(p.left,q.right);    
+    }
+}

@@ -72,8 +72,8 @@ public class Solution {
         {stack1.push(p.left);
          stack2.push(q.right);}
       }
-      if(stack1.empty()&&stack2.empty())
-        return true;
-      else return false;    
+ //     if(stack1.empty()&&stack2.empty())     //最后这些 不用比较两个栈是否都为空 直接返回true也能AC 
+        return true;                          //因为前面循环中判断了所有节点的子节点出现左右不均的情况
+ //     else return false;                   
     }
 }

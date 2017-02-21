@@ -18,3 +18,31 @@ public class Solution {
       else return Math.max(maxDepth(root.right),maxDepth(root.left))+1;
     }
 }
+
+ //迭代方法 参考别人思路  用栈的方式 注意的是用两个栈 一个栈保存长度 一个栈保存节点 然后依次弹出节点和其长度！！
+ public class Solution {
+    public int maxDepth(TreeNode root) {
+      Stack<TreeNode> stack = new Stack <> ();
+      Stack<Integer> value = new Stack<>();
+      if(root == null)
+        return 0;
+      if(root.left == null && root.right == null)
+        return 1;
+      TreeNode p = root;
+      stack.push(p);
+      value.push(1);
+      int max = 0;
+      while(!stack.empty()){
+      p = stack.pop();
+      int val = value.pop();
+      max = Math.max(max,val);  
+      if(p.right != null)
+       {stack.push(p.right);
+       value.push(val+1);}
+      if(p.left != null)
+       {stack.push(p.left);
+        value.push(val+1);}
+      }
+    return max;
+    }
+}

@@ -1,0 +1,13 @@
+//先做个了个插入单个值到二叉树的方法 递归完成
+ public TreeNode insert(int x,TreeNode y)
+    {
+      if(y == null)
+      y = new TreeNode(x);
+      else if(x<y.val)
+      y.left = insert(x,y.left);
+      else if(x>y.val)
+      y.right = insert(x,y.right);
+      return y;
+    }
+//问题就是当连续插入的元素成为的树 并不是二叉查找树 因为数组从小到大排序 结果就是偏向一边
+//中序遍历为严格递增数列==该树为BST.

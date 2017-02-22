@@ -1,0 +1,35 @@
+Given a linked list, determine if it has a cycle in it.
+
+Follow up:
+Can you solve it without using extra space?
+                                                                                             _____
+//判断一个链表是否有环出现                                                                     |    |
+//思路：一开始考虑一个指针去遍历 到起点与原始的链表进行比较 但这样会出现环的位置不在起点 类似于 _____|____|这样的情况
+//用两个指针一个快一个慢 出现相同时返回true
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if(head == null || head.next == null || head.next.next == null)
+        return false;
+        ListNode first = head;
+        ListNode end = head;
+        while(end != null && end.next != null)
+        {
+        first = first.next;   
+        end = end.next.next;
+        if(first == end)
+        return true;
+        }
+        return false;
+    }
+}

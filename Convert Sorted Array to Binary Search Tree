@@ -10,7 +10,8 @@
       return y;
     }
 //问题就是当连续插入的元素成为的树 并不是二叉查找树 因为数组从小到大排序 结果就是偏向一边
-//中序遍历为严格递增数列==该树为BST.
+//主要问题是在插入情况下 避免左右不平衡
+
 
 //对于一个树ABCDEF
 前序遍历，也叫先根遍历，遍历的顺序是，根，左子树，右子树
@@ -35,7 +36,7 @@ public class Solution {
     y = insertmid(y,nums,start,end);
     return y;
     }
-    public TreeNode insertmid(TreeNode y,int[] nums,int start,int end) //插入一个数组中间值 以及左右子数组的中间值 递归下去
+    public TreeNode insertmid(TreeNode y,int[] nums,int start,int end) //插入一个数组中间值 以及左右子数组的中间值 递归下去 实现左右平衡
     {    
         int mid = (start+end)/2;
         y = insert(nums[mid],y);
@@ -46,7 +47,7 @@ public class Solution {
         return y;
     }
     
-    public TreeNode insert(int x,TreeNode y)  //插入一个数到树中
+    public TreeNode insert(int x,TreeNode y)  //插入一个数到树中 单一插入数组会导致二叉树左右平衡
     {
       if(y == null)
       y = new TreeNode(x);

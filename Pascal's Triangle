@@ -40,3 +40,6 @@ public class Solution {
 //解决办法就是在每次重新new对象  
 //即list = new LinkedList(list_tem); 表示新建了一个对象 其内容和list一样 但其实已经不是原来list                               
 //可参考http://www.cnblogs.com/gongheng/p/5766764.html
+
+
+//另外参考别人思路 对于链表可用 .set(a,b)方法把a位置的值修改为b

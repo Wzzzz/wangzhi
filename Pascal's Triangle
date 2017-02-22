@@ -35,3 +35,8 @@ public class Solution {
       return res; 
     }
 }
+//总结list表示的是对象而不是数值   每次循环虽然对象list的值改变但仍为同一个对象 list值会被覆盖 
+//如果list = list_tem  list指针会指向list_tem 最后list_tem清空 res返回值就是[[][][][]]这样全是空数组
+//解决办法就是在每次重新new对象  
+//即list = new LinkedList(list_tem); 表示新建了一个对象 其内容和list一样 但其实已经不是原来list                               
+//可参考http://www.cnblogs.com/gongheng/p/5766764.html

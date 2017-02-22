@@ -1,0 +1,12 @@
+//Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+//You may assume that the array is non-empty and the majority element always exist in the array. 
+//⌊x⌋:地板函数,或取整函数,表示小于 x 的最大整数
+//给一个数组 假定其中有些相同值的数超过全部的一半 求这些值
+//排序下 取中间值 因为部分值超过一半 所以中间值肯定包含在内
+public class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        int mid = (nums.length-1)/2;
+        return nums[mid]; 
+    }
+}

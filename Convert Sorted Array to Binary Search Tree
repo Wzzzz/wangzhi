@@ -21,3 +21,39 @@
 遍历结果：DEBFCA
 
 //看错 这题要求的是平衡二叉树！！
+//平衡二叉树如果靠插入再旋转的方式很麻烦 尽量避免 
+//考虑这是一个排序数组 可以每次插入一个数组的中间值 然后对切开后的数组左右递归下去 避免左右高度不平衡
+//下面是自己写的 用了递归的思想  两个递归实现 一个递归单个int数值插入树的操作  
+//另一个递归实现 一个排序的中间值插入 分成的两个子数组再分别选择中间值插入 递归完成
+public class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+    if(nums.length == 0)
+     return null;
+    TreeNode y = null;
+    int start = nums.length;
+    int end = 0;
+    y = insertmid(y,nums,start,end);
+    return y;
+    }
+    public TreeNode insertmid(TreeNode y,int[] nums,int start,int end) //插入一个数组中间值 以及左右子数组的中间值 递归下去
+    {    
+        int mid = (start+end)/2;
+        y = insert(nums[mid],y);
+        if(start == mid || end == mid)
+        return y;
+        y = insertmid(y,nums,start,mid);
+        y = insertmid(y,nums,mid,end);
+        return y;
+    }
+    
+    public TreeNode insert(int x,TreeNode y)  //插入一个数到树中
+    {
+      if(y == null)
+      y = new TreeNode(x);
+      else if(x<y.val)
+      y.left = insert(x,y.left);
+      else if(x>y.val)
+      y.right = insert(x,y.right);
+      return y;
+    }
+}

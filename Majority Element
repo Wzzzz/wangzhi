@@ -10,3 +10,20 @@ public class Solution {
         return nums[mid]; 
     }
 }
+//别人思路： 用一个计数器和比较器 相同值出现+1 不同值出现-1 当计数器到0  marjor取那个不同的值 与其他的进行比较
+public class Solution {
+    public int majorityElement(int[] num) {
+
+        int major=num[0], count = 1;
+        for(int i=1; i<num.length;i++){
+            if(count==0){
+                count++;
+                major=num[i];
+            }else if(major==num[i]){
+                count++;
+            }else count--;
+            
+        }
+        return major;
+    }
+}

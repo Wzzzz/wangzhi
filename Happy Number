@@ -1,0 +1,35 @@
+Write an algorithm to determine if a number is "happy".
+
+A happy number is a number defined by the following process: Starting with any positive integer, 
+replace the number by the sum of the squares of its digits, and 
+repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy numbers.
+
+Example: 19 is a happy number
+
+1^2 + 9^2 = 82
+8^2 + 2^2 = 68
+6^2 + 8^2 = 100
+1^2 + 0^2 + 0^2 = 1
+//一个数拆开 分别平方相加 循环下去 要不等于1 要不陷入循环但不包括1
+//这里注意这点 因为hashset可以实现数值加入且有相同的返回false操作
+//hashset只实现了hashmap中的key没有vaule 数值无序且有相同值加入即返回false  
+//hashmap就是散列表key——>vaule key由一个数组  vaule由链表实现
+public class Solution {
+    public boolean isHappy(int n) {
+      Set<Integer> set = new HashSet<Integer>();  
+       int a = 0;
+       int sum = 0;
+     while(set.add(n))
+     { sum = 0;
+       while(n != 0)
+       { a = n%10;
+         n = n/10;
+         sum = sum + a*a;} 
+        n = sum;
+        if(sum == 1)
+        return true;
+     }  
+     return false;
+   }
+}

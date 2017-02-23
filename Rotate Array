@@ -26,3 +26,30 @@ public class Solution {
      }
      }
 }
+//参考一下其他的思路 用O(1)空间来做此题 因为只有O(1)空间 所以不破坏数组情况下只能对元素进行交换 用一个int保存实现元素a与b互换位置
+//设计 一个reverse方法实现整个数组所有值的交换 1234567->7654321然后  根据题意
+//可知1234567  k=3  —>先反转1234—>4321  再反转567—>765 这样数组成了4321765  最后再反转成5671234 符合题意 
+public void rotate(int[] nums, int k) {
+
+    if(nums == null || nums.length < 2){
+        return;
+    }
+    
+    k = k % nums.length;
+    reverse(nums, 0, nums.length - k - 1);
+    reverse(nums, nums.length - k, nums.length - 1);
+    reverse(nums, 0, nums.length - 1);
+    
+}
+private void reverse(int[] nums, int i, int j){
+    int tmp = 0;       
+    while(i < j){
+        tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+        i++;
+        j--;
+    }
+}
+}
+

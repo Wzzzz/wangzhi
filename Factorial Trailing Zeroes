@@ -1,0 +1,20 @@
+//Given an integer n, return the number of trailing zeroes in n!.
+Note: Your solution should be in logarithmic time complexity.
+//取一个整数 求n阶乘（n!）的末尾0的个数 注意时间复杂度不应为O（n）
+
+
+ //一开始考虑遍历 即把n到0的值遍历一遍 把其中5或10的倍数挑出来 作为0的个数 结果时间复杂度为O（n）;不符合题意
+//归纳一下规律 n从0-25 发现 每到5的倍数 则结果加一个零 到了5*5的倍数 结果加两个零
+//即为 n!过程中每到5的x方 加x个零  即可以这么做 n/5为不考虑5的次方的零个数 再加上n/5/5为 考虑5的次方的个数 依次类推
+public class Solution {
+    public int trailingZeroes(int n) {
+        if(n==0)
+        return 0;
+        int res = 0;
+        while(n>=5){
+         res = res + n/5;
+         n = n/5;          
+        }
+        return res;
+    }
+}

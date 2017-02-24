@@ -1,0 +1,22 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode rev = null;
+        if(head == null)
+        return head;
+        while(head != null)
+        {ListNode next = head.next;     //注意这里如果用next =head 循环尾用head=next.next是不行  
+        head.next = rev;                //因为next=head  在head.next指针改变会导致next的指针也改变 这样next保存不了head结构
+        rev = head;                     //用next = head.next可以保持下来head指针 再对head指针操作就没问题了 最后把head指向next即可恢复
+        head = next;
+        } 
+        return rev;
+    }
+}

@@ -1,0 +1,27 @@
+//Count the number of prime numbers less than a non-negative number, n.
+//计算出 小于一个非负整数n 所有的素数和
+//遍历方法运算复杂度O（n^2）不符合要求 
+//根据别人思路 用埃拉托色尼筛选法
+//将2到n中的2 3 5 7的倍数全部删去 保留2 3 5 7 剩下的即全部为素数
+//另外一个数n = sqrt(n)*sqrt(n) ; 所以在定义单个数是否为素数时 只要考虑它能不能被2到sqrt(n)数整除即可
+public class Solution {
+    public int countPrimes(int n) {
+    int sum = 0;    
+    boolean[] isPrime = new boolean[n];
+    for(int i=2;i<n;i++) 
+     {isPrime[i]=true;}
+     
+    for(int j=2;j*j<n;j++)  //注意用j*j 而不用n/j
+    {
+     if(isPrime[j]==false)  continue; 
+     for(int i = j*2; i<n; i+=j)
+       { isPrime[i]=false;}
+    }
+
+    for(int x=2;x<n;x++) 
+    { if(isPrime[x]==true)
+       {sum++;}
+    }    
+    return sum;
+}
+}

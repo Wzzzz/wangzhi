@@ -1,0 +1,60 @@
+Given a binary tree, return the bottom-up level order traversal of its nodes' values.
+(ie, from left to right, level by level from leaf to root).
+For example:
+Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its bottom-up level order traversal as:
+[
+  [15,7],
+  [9,20],
+  [3]
+]
+
+//将一个二叉树 每行节点集合用数组形式返回 考虑用队列的方法 即为先进先出 将最上面节点压入队列 再压入子节点 
+//用一个循环计数器记下每行所压入节点个数 按照压入个数取出相应的节点  这种方法被称为BFS 宽度优先搜索算法 
+//BFS与深度优先搜索算法对应 是两种不同算法 一个平行搜索 一个搜索最长路径
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<List<Integer>>();
+        List<Integer> list = new LinkedList<Integer>();
+        List<TreeNode> queue = new LinkedList<TreeNode>();
+        if(root == null)
+        return res;
+        int n = 1;
+        int q = 1;
+        queue.add(root);
+        while(q != 0)
+        { n = q;
+          q = 0;
+         for(int i = 0;i<n;i++)
+         {
+         TreeNode p = queue.get(0);
+         list.add(0,p.val);
+         queue.remove(0);
+         if(p.right != null)
+           {queue.add(p.right);
+            q++;}
+         if(p.left != null)
+            {queue.add(p.left);
+            q++;}
+         }
+         res.add(0,new LinkedList(list));
+         list.clear();
+        }
+        return res;
+     }
+     
+}

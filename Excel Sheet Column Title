@@ -1,0 +1,32 @@
+Total Accepted: 91714
+Total Submissions: 369254
+Difficulty: Easy
+Contributors: Admin
+Given a positive integer, return its corresponding column title as appear in an Excel sheet.
+
+For example:
+
+    1 -> A
+    2 -> B
+    3 -> C
+    ...
+    26 -> Z
+    27 -> AA
+    28 -> AB 
+//思路：类似于进制转换  注意一点是这个进制 1 2 3 4 5 6 7 8 9 11 12 13 14 15 16 17 18 19 21...去掉了10和20
+//进制转换：数值除以进制N 不为0 不断取余即可 注意每次取余循环时n-- 否则10 20这种值会出现  
+//然后上述为26进制 但是一般n%26 n = n/26会取到0 
+public class Solution {
+    public String convertToTitle(int n) {
+        StringBuffer res = new StringBuffer();
+        while(n!=0)
+        { n--;
+          int rr = n%26;
+          char s = (char)('A'+rr);
+          res.insert(0,s);
+          n = n/26;
+        }
+         String re = res.toString();
+         return re;        
+    }
+}

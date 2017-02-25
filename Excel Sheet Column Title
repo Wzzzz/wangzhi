@@ -16,6 +16,7 @@ For example:
 //思路：类似于进制转换  注意一点是这个进制 1 2 3 4 5 6 7 8 9 11 12 13 14 15 16 17 18 19 21...去掉了10和20
 //进制转换：数值除以进制N 不为0 不断取余即可 注意每次取余循环时n-- 否则10 20这种值会出现  
 //然后上述为26进制 但是一般n%26 n = n/26会取到0 
+//比如 0 1 2 3 4 5 6 7 8 9 00 01 02 03......09 10...19 20.....     这么看清楚多了 在进位的时候n-1
 public class Solution {
     public String convertToTitle(int n) {
         StringBuffer res = new StringBuffer();

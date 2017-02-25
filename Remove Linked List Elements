@@ -34,3 +34,22 @@ public class Solution {
         return b;
  }
 }
+
+别人思路
+public class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode fakeHead = new ListNode(-1);
+        fakeHead.next = head;
+        ListNode curr = head, prev = fakeHead;  
+        while (curr != null) {              //curr比prev多进一格
+            if (curr.val == val) {          //当值出现相同
+                prev.next = curr.next;      //prev的指针指向curr的指针  但此时prev并没有改变链表 不断改变prev.next对prev并没有影响 
+            } else {                       //只要prev最后指向prev.next即可
+                prev = prev.next;
+            }
+            curr = curr.next;               //curr前进一格
+        }
+        return fakeHead.next;              其实ListNode a = b     移动a返回b 与 移动b返回a 效果是一样的！！！！！
+    }
+    
+}

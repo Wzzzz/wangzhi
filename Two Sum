@@ -25,3 +25,7 @@ public class Solution {
          return result;   //注意需要返回两次result  一次从for循环中返回 一次在函数中返回
    }
 }
+
+//别人思路  这题可以用两个指针 i n 分别指向数组最小值和最大值  当num[i]+num[n]<target i++; 反之 n--; 依次循环 可得最终结果
+//类似于一个动态规划思想 min+max<target  说明min这个值加上剩余其他任何值都要小于target  所以去掉min  
+//同样min+max>target  说明max这个值加上剩余其他任何值都要大于target  所以去掉max  循环可得最终结果

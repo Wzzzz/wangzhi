@@ -1,0 +1,36 @@
+Remove all elements from a linked list of integers that have value val.
+
+Example
+Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
+Return: 1 --> 2 --> 3 --> 4 --> 5
+//删除一个链表中重复的值
+
+//思路：用三个指针  第一个指针head遍历元素 第二个指针a不断指向与val不同的元素 最后一个指针b指向第二指针a的开始位置
+//注意问题就是开始位置和结束位置出现多个val怎么处理： 开始位置处理 b = b.next即可  结束位置a.next = null  
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        if(head == null)
+        return head;
+        ListNode a = head;
+        ListNode b = a;
+        while(head.next != null)
+        { head = head.next;
+         if(head.val != val)
+          {a.next = head;
+           a = a.next;}
+        }
+        if(head.val == val)
+         a.next = null;
+        if(b.val == val)
+          b = b.next; 
+        return b;
+ }
+}

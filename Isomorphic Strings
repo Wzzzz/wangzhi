@@ -1,0 +1,30 @@
+Given two strings s and t, determine if they are isomorphic.
+Two strings are isomorphic if the characters in s can be replaced to get t.
+All occurrences of a character must be replaced with another character while preserving the order of characters.
+No two characters may map to the same character but a character may map to itself.
+For example,
+Given "egg", "add", return true.
+Given "foo", "bar", return false.
+Given "paper", "title", return true.
+Note:
+You may assume both s and t have the same length.
+//判断两个相同长度字符串s,t结构一样 aabbb 对应 cceee这样的
+//需注意 s=ab t=aa 这种情况
+//思路 ：首先用map表把s中字符当做键 把t中字符当做值 当s与t某一位都没有出现在map中 把键值对加入map  当map已经有该键 判断是否键值相同 不同返回false
+//！！！！！需注意当键不存在map 但是值已经存在map的情况下也需返回false （aa ab这种情况）
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+    HashMap<Character,Character> map = new HashMap<Character,Character>(); 
+    for(int i = 0;i<s.length();i++)
+    {  char a = s.charAt(i);
+       char b = t.charAt(i);
+       if(!map.containsKey(a) && !map.containsValue(b))
+         map.put(s.charAt(i),t.charAt(i));
+       else if(map.containsKey(a) && map.get(a) != b)
+          return false;
+       else if(!map.containsKey(a) && map.containsValue(b))       
+          return false; 
+    }   
+     return true;   
+  }    
+}        

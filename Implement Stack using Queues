@@ -1,0 +1,50 @@
+//Implement the following operations of a stack using queues.
+push(x) -- Push element x onto stack.
+pop() -- Removes the element on top of the stack.
+top() -- Get the top element.
+empty() -- Return whether the stack is empty.
+//用一个队列的操作及队列实现栈
+Notes:
+You must use only standard operations of a queue -- which means only push to back, peek/pop from front, size, 
+and is empty operations are valid.
+Depending on your language, queue may not be supported natively. 
+You may simulate a queue by using a list or deque (double-ended queue), as long as you use only standard operations of a queue.
+You may assume that all operations are valid (for example, no pop or top operations will be called on an empty stack).
+//只能用后加 前出 查询大小等方法 其他不能用
+//思路是用两个队列 返回栈顶元素时 一个队列将其中n-1（n为队列长度）个元素弹出到另一个队列 把最后加入队列后端的元素作为栈顶元素
+//然后再把另一个队列的元素再返还弹给第一个队列 恢复第一个队列
+public class MyStack {
+    Queue<Integer> tmp = new LinkedList<Integer>();
+    Queue<Integer> queue = new LinkedList<Integer>();
+    /** Push element x onto stack. */
+    public void push(int x) {
+       queue.offer(x);
+    }
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+      if(queue.size()==0)
+        return 0;
+      while(queue.size()>1)
+      {tmp.offer(queue.poll());}
+      int k = queue.poll();
+      while(tmp.size()>0)
+      {queue.offer(tmp.poll());}
+      return k;
+    }
+    /** Get the top element. */
+    public int top() {
+      if(queue.size()==0)
+      return 0;
+      while(queue.size()>1)
+      {tmp.offer(queue.poll());}
+      int k = queue.poll();
+      tmp.offer(k);
+      while(tmp.size()>0)
+      {queue.offer(tmp.poll());}
+      return k;  
+    }
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+      return queue.isEmpty();  
+    }
+}
